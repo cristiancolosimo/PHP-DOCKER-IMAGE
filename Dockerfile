@@ -5,7 +5,7 @@ ARG CACHEBUST=1.1
 RUN apt-get update -y
 
 RUN apt-get install -y libpng-dev postgresql libpq-dev
-RUN docker-php-ext-install mysqli pdo pdo_mysql pdo_pgsql
+RUN docker-php-ext-install mysqli pgsql  pdo pdo_mysql pdo_pgsql
 
 # RUN apt-get install -y sendmail
 RUN apt-get install -y libpng-dev libcurl4-openssl-dev  zlib1g-dev  libonig-dev libzip-dev 
