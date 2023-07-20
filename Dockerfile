@@ -4,7 +4,8 @@ ARG CACHEBUST=1.1
 
 RUN apt-get update -y
 
-RUN docker-php-ext-install mysqli pdo pdo_mysql
+RUN apt-get install -y libpng-dev postgresql libpq-dev
+RUN docker-php-ext-install mysqli pdo pdo_mysql pdo_pgsql
 
 # RUN apt-get install -y sendmail
 RUN apt-get install -y libpng-dev libcurl4-openssl-dev  zlib1g-dev  libonig-dev libzip-dev 
@@ -13,7 +14,7 @@ RUN docker-php-ext-install zip gd iconv mbstring
 
 RUN apt-get install -y libxml2-dev
 RUN docker-php-ext-install curl dom xml zip simplexml
-
+RUN docker-php-ext-install soap
 
 RUN apt-get install -q -y ssmtp mailutils libicu-dev \ 
 && docker-php-ext-configure intl \
@@ -40,4 +41,5 @@ RUN echo "file_uploads = On\n" \
          "upload_max_filesize = 500M\n" \
          "post_max_size = 500M\n" \
          "max_execution_time = 300\n" \
+         "max_input_vars = 5000\n"\
          > /usr/local/etc/php/conf.d/uploads.ini
